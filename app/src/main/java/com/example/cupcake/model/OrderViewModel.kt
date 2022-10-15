@@ -3,6 +3,8 @@ package com.example.cupcake.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrderViewModel : ViewModel() {
 
@@ -17,6 +19,9 @@ class OrderViewModel : ViewModel() {
     // Pickup date
     private val _date = MutableLiveData<String>("")
     val date: LiveData<String> = _date
+
+    // Possible date options
+    val dateOptions: List<String> = getPickupOptions()
 
     // Price of the order so far
     private val _price = MutableLiveData<Double>(0.0)
@@ -55,5 +60,26 @@ class OrderViewModel : ViewModel() {
      */
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
+    }
+
+    /**
+     * Returns a list of date options starting with the current date and the following 3 dates.
+     */
+    private fun getPickupOptions(): List<String> {
+        val options = mutableListOf<String>()
+
+        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
+        // This variable will contain the current date and time
+        val calendar = Calendar.getInstance()
+
+        // Create a list of dates starting with the current date and the following 3 dates
+        repeat(4) {
+            // Adds current date to option list
+            options.add(formatter.format(calendar.time))
+            // Adds one day to the current date
+            calendar.add(Calendar.DATE, 1)
+        }
+
+        return options
     }
 }
