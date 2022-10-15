@@ -51,6 +51,9 @@ class FlavorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
+            // Specify the fragment as the lifecycle owner
+            lifecycleOwner = viewLifecycleOwner
+
             // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
 

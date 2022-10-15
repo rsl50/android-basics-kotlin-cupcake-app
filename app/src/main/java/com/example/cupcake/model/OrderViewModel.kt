@@ -9,6 +9,9 @@ import java.util.*
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 2.00
 
+/** Additional cost for same day pickup of an order */
+private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+
 class OrderViewModel : ViewModel() {
 
     // Quantity of cupcakes in this order
@@ -68,6 +71,7 @@ class OrderViewModel : ViewModel() {
      */
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
+        updatePrice()
     }
 
     /**
@@ -97,7 +101,13 @@ class OrderViewModel : ViewModel() {
     private fun updatePrice() {
         // Calculate price as quantity * PRICE_PER_CUPCAKE, if quantity.value is null set value
         // to 0, hence, price is 0.
-        _price.value = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
+        var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
+
+        // If the user selected the first option (today) for pickup, add the surcharge
+        if (dateOptions[0] == _date.value) {
+            calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
+        }
+        _price.value = calculatedPrice
     }
 
     /**
