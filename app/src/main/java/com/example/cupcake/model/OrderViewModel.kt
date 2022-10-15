@@ -42,6 +42,13 @@ class OrderViewModel : ViewModel() {
     }
 
     /**
+     * Returns true if a flavor has not been selected for the order yet. Returns false otherwise.
+     */
+    fun hasNoFlavorSet(): Boolean {
+        return  _flavor.value.isNullOrEmpty()
+    }
+
+    /**
      * Set the pickup date for this order.
      *
      * @param pickupDate to pickup order
