@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
+/** Price for a single cupcake */
+private const val PRICE_PER_CUPCAKE = 2.00
+
 class OrderViewModel : ViewModel() {
 
     // Quantity of cupcakes in this order
@@ -39,6 +42,7 @@ class OrderViewModel : ViewModel() {
      */
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
+        updatePrice()
     }
 
     /**
@@ -85,6 +89,15 @@ class OrderViewModel : ViewModel() {
         }
 
         return options
+    }
+
+    /**
+     * Updates the price based on the order details.
+     */
+    private fun updatePrice() {
+        // Calculate price as quantity * PRICE_PER_CUPCAKE, if quantity.value is null set value
+        // to 0, hence, price is 0.
+        _price.value = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
     }
 
     /**
