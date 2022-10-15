@@ -58,7 +58,8 @@ class SummaryFragment : Fragment() {
             // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
 
-            sendButton.setOnClickListener { sendOrder() }
+            // Assign the fragment
+            summaryFragment = this@SummaryFragment
         }
     }
 

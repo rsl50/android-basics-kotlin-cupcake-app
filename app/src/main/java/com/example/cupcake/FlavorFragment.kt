@@ -57,7 +57,8 @@ class FlavorFragment : Fragment() {
             // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
 
-            nextButton.setOnClickListener { goToNextScreen() }
+            // Assign the fragment
+            flavorFragment = this@FlavorFragment
         }
     }
 
