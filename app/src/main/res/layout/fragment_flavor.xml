@@ -86,6 +86,14 @@
                     android:checked="@{viewModel.flavor.equals(@string/coffee)}"
                     android:onClick="@{() -> viewModel.setFlavor(@string/coffee)}"
                     android:text="@string/coffee" />
+
+                <RadioButton
+                  android:id="@+id/special_flavor"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:checked="@{viewModel.flavor.equals(@string/special_flavor)}"
+                  android:onClick="@{() -> viewModel.setFlavor(@string/special_flavor)}"
+                  android:text="@string/special_flavor" />
             </RadioGroup>
 
             <View

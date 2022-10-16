@@ -57,6 +57,12 @@ class PickupFragment : Fragment() {
             // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
 
+            // If Special Flavor was selected, disable the same day pickup date and select next date
+            if (sharedViewModel.isSpecialFlavorSelected() == true) {
+                binding?.option0?.isEnabled = false
+                sharedViewModel.setDate(sharedViewModel.dateOptions[1])
+            }
+
             // Assign the fragment
             pickupFragment = this@PickupFragment
         }

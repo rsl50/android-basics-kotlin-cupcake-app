@@ -24,6 +24,9 @@ class OrderViewModel : ViewModel() {
     private val _flavor = MutableLiveData<String>()
     val flavor: LiveData<String> = _flavor
 
+    // Flag to indicate if Special Flavor is selected
+    private val _isSpecialFlavorSelected = MutableLiveData<Boolean>()
+
     // Pickup date
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
@@ -60,6 +63,22 @@ class OrderViewModel : ViewModel() {
      */
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
+    }
+
+    /**
+     * Set the Special flavor selected state. Special flavor doesn't allow same day pickup
+     *
+     * @param isSelected true if Special flavor selected, false otherwise
+     */
+    fun setSpecialFlavorSelected(isSelected: Boolean) {
+        _isSpecialFlavorSelected.value = isSelected
+    }
+
+    /**
+     * Returns true if Special flavor has been selected. Returns false otherwise.
+     */
+    fun isSpecialFlavorSelected(): Boolean? {
+        return _isSpecialFlavorSelected.value
     }
 
     /**
@@ -121,6 +140,7 @@ class OrderViewModel : ViewModel() {
     fun resetOrder() {
         _quantity.value = 0
         _flavor.value = ""
+        _isSpecialFlavorSelected.value = false
         _date.value = dateOptions[0]
         _price.value = 0.0
     }

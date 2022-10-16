@@ -63,9 +63,22 @@ class FlavorFragment : Fragment() {
     }
 
     /**
+     * Update ViewModel flag indicating if Special Flavor is selected.
+     */
+    private fun updateSpecialFlavorSelectedState() {
+        if (binding?.flavorOptions?.checkedRadioButtonId == binding?.specialFlavor?.id) {
+            sharedViewModel.setSpecialFlavorSelected(true)
+        } else {
+            sharedViewModel.setSpecialFlavorSelected(false)
+        }
+    }
+
+    /**
      * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
+        updateSpecialFlavorSelectedState()
+
         // Navigate from flavor fragment to pickup fragment
         findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
     }
